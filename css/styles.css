@@ -1,0 +1,57 @@
+body {
+  background-color: #1F2123;
+  padding: 20px;
+}
+
+h1{
+  color: white;
+}
+
+/* List item styling */
+li.list-group-item {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  background: #27292B;
+  margin-top: 5px;
+  border: 0 none;
+  color: white;
+}
+
+/* Hover effect */
+li.list-group-item:hover{
+  background: #2E3133;
+  }
+  
+
+/* list container styling */
+#A {
+  background: #191A1B;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#B {
+  background: #480D13;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#C {
+  background: #5C4600;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#D {
+  background: #1A3D22;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
