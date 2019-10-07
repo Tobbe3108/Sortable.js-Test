@@ -1,124 +1,179 @@
 <!doctype html>
 <html lang=dk>
-<head>
-  <meta charset="utf-8">
-  <title>Drag and Drop</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
-  
-  <link rel="stylesheet" href="styles/indexStyle.css">
-  
-  <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script>
-  <script src="scripts/stitchScript.js"></script>
-</head>
-<body>
-
-
-
-  <div id="LoginView" style="display: none">
+  <head>
+    <meta charset="utf-8">
+    <title>Drag and Drop</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!--Viewport for nice looking mobile rendering-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!--Bootstrap-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    
+    <!--Sortable.js-->
+    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+    
+    <!--index.html css og js file-->
+    <link rel="stylesheet" href="styles/indexStyle.css">
+    <script src="scripts/indexScript.js"></script>
+    
+    <!--jQuery-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!--Stitch usings-->
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script>
+    <script src="scripts/stitchScript.js"></script>
+  </head>
+  <body>
+    <!--LoginView-->
+    <!-- #region -->
+    <div id="LoginView" style="display: none">
       <link href="styles/loginStyle.css" rel="stylesheet">
       <div class="container login-container">
-          <div class="row justify-content-center">
-              <div class="col-sm-6 login-form-1">
-                  <h3>Login</h3>
-                  <div class="form-group">
-                      <input id="formMail" type="text" class="form-control" placeholder="Your Email *" value="" />
-                  </div>
-                  <div class="form-group">
-                      <input id="formPassword" type="password" class="form-control" placeholder="Your Password *" value="" />
-                  </div>
-                  <div>
-                    <button class="btnSubmit" onClick="showMain()">Back</button>
-                    <button class="btnSubmit" onClick="login()">Login</button>
-                  </div>
-                  <br>
-                  <p id="failLogInMessage">*Den indtastede Mail/Kode er ikke korrekt</p>
-              </div>
+        <div class="row justify-content-center">
+          <div class="col-sm-6 login-form-1">
+            <h3>Login</h3>
+            <div class="form-group">
+              <input id="formMail" type="text" class="form-control" placeholder="Your Email *" value="" />
+            </div>
+            <div class="form-group">
+              <input id="formPassword" type="password" class="form-control" placeholder="Your Password *" value="" />
+            </div>
+            <div class="form-group">
+              <button class="btn btn-light btn-block" onClick="login()">Login</button>
+              <button class="btn btn-light btn-block" onClick="showMain()">Back</button>
+            </div>
+            <br>
+            <p id="failLogInMessage">*Den indtastede Mail/Kode er ikke korrekt</p>
           </div>
-      </div>
-  </div>
-
-
-
-  <div id="MainView">
-    <link rel="stylesheet" href="styles/menuBarStyle.css">
-    <ul id="ulNav">
-      <li id="liNav"><a></a></li>
-      <li style="float:right"><a id="loginDisplay" value="Login" onClick="showLogin()">Login</a></li>
-      <li style="float:right"><a id="logoutDisplay" value="Logout" onClick="logout()">Logout</a></li>
-      <li style="float:right"><a id="userNameDisplay"></a></li>
-    </ul>
-    <br>
-    <br>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-3 col-lg-6 col-sm-12">
-          <h1>Helt dårligt</h1>
-          <ul id="A" class="list-group list-group-flush">
-            <li class="list-group-item card">
-              <div class="card-body">
-                <h5 class="card-title">Jeg kan flyttes!</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </li>
-          </ul>
-          <br>
-        </div>
-
-        <div class="col-xl-3 col-lg-6 col-sm-12">
-          <h1>Går mig meget på</h1>
-          <ul id="B" class="list-group list-group-flush">
-            <li class="list-group-item card">
-              <div class="card-body">
-                <h5 class="card-title">Også mig!</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </li>
-          </ul>
-          <br>
-        </div>
-
-        <div class="col-xl-3 col-lg-6 col-sm-12">
-          <h1>Går mig på</h1>
-          <ul id="C" class="list-group list-group-flush">
-            <li class="list-group-item card">
-              <div class="card-body">
-                <h5 class="card-title">Og mig!</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </li>            
-          </ul>
-          <br>
-        </div>
-
-        <div class="col-xl-3 col-lg-6 col-sm-12">
-        <h1>Gør mig glad</h1>
-          <ul id="D" class="list-group list-group-flush">
-            <li class="list-group-item card">
-              <div class="card-body">
-                <h5 class="card-title">Selfølgelig også mig!</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </li>              
-          </ul>
         </div>
       </div>
     </div>
+    <!-- #endregion -->
 
-    <script src="scripts/sortableScript.js"></script>
+    <!--MainView-->
+    <!-- #region -->
+    <div id="MainView">
+      <!--Menubar-->
+      <!-- #region -->
+      <link rel="stylesheet" href="styles/menuBarStyle.css">
+      <ul id="ulNav">
+        <li id="liNav"><a></a></li>
+        <li style="float:right"><a id="loginDisplay" value="Login" onClick="showLogin()">Login</a></li>
+        <li style="float:right"><a id="logoutDisplay" value="Logout" onClick="logout()">Logout</a></li>
+        <li style="float:right"><a id="userNameDisplay"></a></li>
+      </ul>
+      <br>
+      <br>
+      <!-- #endregion -->
 
-    <script type="text/javascript">
-      init();
-    </script>
+      <!--Drag and Drop-->
+      <!-- #region -->
+      <div class="container-fluid">
+        <div class="row">
+          
+          <!--Helt dårligt-->
+          <!-- #region -->
+          <div class="col-xl-3 col-lg-6 col-sm-12">
+            <ul id="A" class="list-group list-group-flush">
+              <ul class="list-inline">
+                <h1 class="list-inline-item">Helt dårligt</h1>
+                <button class="btn btn-primary list-inline-item float-right" onclick="addCard('A')">Tilføj</button>
+              </ul>
+              
+              <li class="list-group-item card">
+                <div class="card-body">
+                  <button id="editBtn">Edit</button>
+                  <button id="saveBtn" style="display: none">Save</button>
+          
+                  <div id="view">
+                    <h5 class="card-title">Temp</h5>
+                    <p class="card-text">Temp</p>
+                  </div>
+          
+                  <div id="edit" class="form-group" style="display: none">
+                    <input type="text" class="form-control">
+                    <br>
+                    <textarea class="form-control" rows="1"></textarea>
+                  </div>
+          
+                  <script>
+                    $("#editBtn").click(function () {
+                      $("#editBtn").hide();
+                      $("#saveBtn").show();
+                      $("#view").hide();
+                      $("#edit").show();
+                    });
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  </div>
+                    $("#saveBtn").click(function () {
+                      $("#editBtn").show();
+                      $("#saveBtn").hide();
+                      $("#view").show();
+                      $("#edit").hide();
+                    });
+                  </script>
+                </div>
+              </li>
 
-</body>
+            </ul>
+            <br>
+          </div>
+          <!-- #endregion -->
+
+          <!--Går mig meget på-->
+          <!-- #region -->
+          <div class="col-xl-3 col-lg-6 col-sm-12">
+            <ul id="B" class="list-group list-group-flush">
+              <ul class="list-inline">
+                  <h1 class="list-inline-item">Går mig meget på</h1>
+                  <button class="btn btn-primary list-inline-item float-right" onclick="addCard('B')">Tilføj</button>
+              </ul>
+            </ul>
+            <br>
+          </div>
+          <!-- #endregion -->
+
+          <!--Går mig på-->
+          <!-- #region -->
+          <div class="col-xl-3 col-lg-6 col-sm-12">
+            <ul id="C" class="list-group list-group-flush">
+              <ul class="list-inline">
+                  <h1 class="list-inline-item">Går mig på</h1>
+                  <button class="btn btn-primary list-inline-item float-right" onclick="addCard('C')">Tilføj</button>
+              </ul>
+            </ul>
+            <br>
+          </div>
+          <!-- #endregion -->
+
+          <!--Gør mig glad-->
+          <!-- #region -->
+          <div class="col-xl-3 col-lg-6 col-sm-12">
+            <ul id="D" class="list-group list-group-flush">
+              <ul class="list-inline">
+                  <h1 class="list-inline-item">Gør mig glad</h1>
+                  <button class="btn btn-primary list-inline-item float-right" onclick="addCard('D')">Tilføj</button>
+              </ul>
+            </ul>
+          </div>
+          <!-- #endregion -->
+
+        </div>
+      </div>
+      <!-- #endregion -->
+
+      <!--Script that makes drag and drop work-->
+      <script src="scripts/sortableScript.js"></script>
+
+      <!--Run init() on page load-->
+      <script type="text/javascript">
+        init();
+      </script>
+
+      <!--Bootstrap javaScript-->
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </div>
+    <!-- #endregion -->
+  </body>
 </html>

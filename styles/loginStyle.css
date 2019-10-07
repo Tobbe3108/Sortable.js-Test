@@ -19,16 +19,6 @@ body{
     color:#fff;
 }
 
-.btnSubmit{
-    font-weight: 600;
-    width: 49%;
-    color: #2E3133;;
-    background-color: #fff;
-    border: none;
-    border-radius: 1.5rem;
-    padding:2%;
-}
-
 #failLogInMessage{
     color: red;
     display: none;
