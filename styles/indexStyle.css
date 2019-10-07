@@ -5,7 +5,33 @@ body {
 
 h1{
   color: white;
+  font-size: 20px;
 }
+
+h5{
+  font-size: 20px;
+}
+
+p{
+  font-size: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  h1{font-size: 20px;}
+  h5{font-size: 20px;}
+  p{font-size: 15px;}
+}
+@media screen and (min-width: 992px) {
+  h1{font-size: 30px;}
+  h5{font-size: 20px;}
+  p{font-size: 15px;}
+}
+@media screen and (min-width: 1200px) {
+  h1{font-size: 30px;}
+  h5{font-size: 20px;}
+  p{font-size: 15px;}
+}
+
 
 /* List item styling */
 li.list-group-item {

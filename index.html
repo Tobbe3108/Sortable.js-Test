@@ -1,71 +1,124 @@
 <!doctype html>
-<html lang="dk">
+<html lang=dk>
 <head>
   <meta charset="utf-8">
   <title>Drag and Drop</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
   <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
-  <link rel="stylesheet" href="css/styles.css">
+  
+  <link rel="stylesheet" href="styles/indexStyle.css">
+  
+  <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script>
+  <script src="scripts/stitchScript.js"></script>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <h1>Helt dårligt</h1>
-        <ul id="A" class="list-group list-group-flush">
-          <li class="list-group-item card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
 
-      <div class="col">
-        <h1>Går mig meget på</h1>
-        <ul id="B" class="list-group list-group-flush">
-          <li class="list-group-item card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
 
-      <div class="col">
-        <h1>Går mig på</h1>
-        <ul id="C" class="list-group list-group-flush">
-          <li class="list-group-item card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </li>            
-        </ul>
-      </div>
 
-      <div class="col">
-      <h1>Gør mig glad</h1>
-        <ul id="D" class="list-group list-group-flush">
-          <li class="list-group-item card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </li>              
-        </ul>
+  <div id="LoginView" style="display: none">
+      <link href="styles/loginStyle.css" rel="stylesheet">
+      <div class="container login-container">
+          <div class="row justify-content-center">
+              <div class="col-sm-6 login-form-1">
+                  <h3>Login</h3>
+                  <div class="form-group">
+                      <input id="formMail" type="text" class="form-control" placeholder="Your Email *" value="" />
+                  </div>
+                  <div class="form-group">
+                      <input id="formPassword" type="password" class="form-control" placeholder="Your Password *" value="" />
+                  </div>
+                  <div>
+                    <button class="btnSubmit" onClick="showMain()">Back</button>
+                    <button class="btnSubmit" onClick="login()">Login</button>
+                  </div>
+                  <br>
+                  <p id="failLogInMessage">*Den indtastede Mail/Kode er ikke korrekt</p>
+              </div>
+          </div>
       </div>
-    </div>
   </div>
 
-  <script src="js/scripts.js"></script>
+
+
+  <div id="MainView">
+    <link rel="stylesheet" href="styles/menuBarStyle.css">
+    <ul id="ulNav">
+      <li id="liNav"><a></a></li>
+      <li style="float:right"><a id="loginDisplay" value="Login" onClick="showLogin()">Login</a></li>
+      <li style="float:right"><a id="logoutDisplay" value="Logout" onClick="logout()">Logout</a></li>
+      <li style="float:right"><a id="userNameDisplay"></a></li>
+    </ul>
+    <br>
+    <br>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 col-sm-12">
+          <h1>Helt dårligt</h1>
+          <ul id="A" class="list-group list-group-flush">
+            <li class="list-group-item card">
+              <div class="card-body">
+                <h5 class="card-title">Jeg kan flyttes!</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </li>
+          </ul>
+          <br>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-sm-12">
+          <h1>Går mig meget på</h1>
+          <ul id="B" class="list-group list-group-flush">
+            <li class="list-group-item card">
+              <div class="card-body">
+                <h5 class="card-title">Også mig!</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </li>
+          </ul>
+          <br>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-sm-12">
+          <h1>Går mig på</h1>
+          <ul id="C" class="list-group list-group-flush">
+            <li class="list-group-item card">
+              <div class="card-body">
+                <h5 class="card-title">Og mig!</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </li>            
+          </ul>
+          <br>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-sm-12">
+        <h1>Gør mig glad</h1>
+          <ul id="D" class="list-group list-group-flush">
+            <li class="list-group-item card">
+              <div class="card-body">
+                <h5 class="card-title">Selfølgelig også mig!</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </li>              
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts/sortableScript.js"></script>
+
+    <script type="text/javascript">
+      init();
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </div>
 
 </body>
 </html>
