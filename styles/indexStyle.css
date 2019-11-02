@@ -35,7 +35,7 @@ p{
 
 /* List item styling */
 li.list-group-item {
-  cursor: move;
+  /*cursor: move;*/
   cursor: -webkit-grabbing;
   background: #27292B;
   margin-top: 5px;

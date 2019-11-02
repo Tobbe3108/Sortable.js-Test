@@ -1,4 +1,5 @@
 <!doctype html>
+</script>
 <html lang=dk>
   <head>
     <meta charset="utf-8">
@@ -9,14 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!--Bootstrap-->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     <!--Sortable.js-->
     <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
     
-    <!--index.html css og js file-->
+    <!--index.html css file-->
     <link rel="stylesheet" href="styles/indexStyle.css">
-    <script src="scripts/indexScript.js"></script>
     
     <!--jQuery-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -24,6 +24,16 @@
     <!--Stitch usings-->
     <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script>
     <script src="scripts/stitchScript.js"></script>
+
+    <!--Fontawesome-->
+    <script src="https://kit.fontawesome.com/5872d0ca7c.js" crossorigin="anonymous"></script>
+
+    <!--Tooltip inti-->
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
   </head>
   <body>
     <!--LoginView-->
@@ -60,9 +70,9 @@
       <link rel="stylesheet" href="styles/menuBarStyle.css">
       <ul id="ulNav">
         <li id="liNav"><a></a></li>
-        <li style="float:right"><a id="loginDisplay" value="Login" onClick="showLogin()">Login</a></li>
+        <li style="float:right"><a id="loginDisplay" value="Login" onClick="showLogin()"><i class="fas fa-sign-in-alt"></i> Login</a></li>
         <li style="float:right"><a id="logoutDisplay" value="Logout" onClick="logout()">Logout</a></li>
-        <li style="float:right"><a id="userNameDisplay"></a></li>
+        <li style="float:right"><a id="userNameDisplay" data-toggle="tooltip" data-placement="bottom" title=""><i class="far fa-user"></i></a></li>
       </ul>
       <br>
       <br>
@@ -70,6 +80,7 @@
 
       <!--Drag and Drop-->
       <!-- #region -->
+      <script src="scripts/cardScript.js"></script>
       <div class="container-fluid">
         <div class="row">
           
@@ -79,43 +90,8 @@
             <ul id="A" class="list-group list-group-flush">
               <ul class="list-inline">
                 <h1 class="list-inline-item">Helt dårligt</h1>
-                <button class="btn btn-primary list-inline-item float-right" onclick="addCard('A')">Tilføj</button>
+                <button id="addBtn" class="btn btn-primary list-inline-item float-right" onclick="cardAddDB('A', this)">Tilføj</button>
               </ul>
-              
-              <li class="list-group-item card">
-                <div class="card-body">
-                  <button id="editBtn">Edit</button>
-                  <button id="saveBtn" style="display: none">Save</button>
-          
-                  <div id="view">
-                    <h5 class="card-title">Temp</h5>
-                    <p class="card-text">Temp</p>
-                  </div>
-          
-                  <div id="edit" class="form-group" style="display: none">
-                    <input type="text" class="form-control">
-                    <br>
-                    <textarea class="form-control" rows="1"></textarea>
-                  </div>
-          
-                  <script>
-                    $("#editBtn").click(function () {
-                      $("#editBtn").hide();
-                      $("#saveBtn").show();
-                      $("#view").hide();
-                      $("#edit").show();
-                    });
-
-                    $("#saveBtn").click(function () {
-                      $("#editBtn").show();
-                      $("#saveBtn").hide();
-                      $("#view").show();
-                      $("#edit").hide();
-                    });
-                  </script>
-                </div>
-              </li>
-
             </ul>
             <br>
           </div>
@@ -127,7 +103,7 @@
             <ul id="B" class="list-group list-group-flush">
               <ul class="list-inline">
                   <h1 class="list-inline-item">Går mig meget på</h1>
-                  <button class="btn btn-primary list-inline-item float-right" onclick="addCard('B')">Tilføj</button>
+                  <button id="addBtn" class="btn btn-primary list-inline-item float-right" onclick="cardAddDB('B', this)">Tilføj</button>
               </ul>
             </ul>
             <br>
@@ -140,7 +116,7 @@
             <ul id="C" class="list-group list-group-flush">
               <ul class="list-inline">
                   <h1 class="list-inline-item">Går mig på</h1>
-                  <button class="btn btn-primary list-inline-item float-right" onclick="addCard('C')">Tilføj</button>
+                  <button id="addBtn" class="btn btn-primary list-inline-item float-right" onclick="cardAddDB('C', this)">Tilføj</button>
               </ul>
             </ul>
             <br>
@@ -153,7 +129,7 @@
             <ul id="D" class="list-group list-group-flush">
               <ul class="list-inline">
                   <h1 class="list-inline-item">Gør mig glad</h1>
-                  <button class="btn btn-primary list-inline-item float-right" onclick="addCard('D')">Tilføj</button>
+                  <button id="addBtn" class="btn btn-primary list-inline-item float-right" onclick="cardAddDB('D', this)">Tilføj</button>
               </ul>
             </ul>
           </div>
@@ -171,8 +147,10 @@
         init();
       </script>
 
-      <!--Bootstrap javaScript-->
-      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <!--Bootstrap JS, jQuery and Popper-->
+      <<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </div>
     <!-- #endregion -->
   </body>
